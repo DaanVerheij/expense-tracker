@@ -1,30 +1,30 @@
 import { createContext, useReducer } from 'react';
 
-// expenses die gelijk worden getoond
+// uitgaven die gelijk worden getoond 
 const DUMMY_EXPENSES = [
   {
     id: 'e1',
-    description: 'A pair of shoes',
-    amount: 59.99,
-    date: new Date('2021-12-19'),
+    description: 'Nike schoenen',
+    amount: 119.99,
+    date: new Date('2022-12-19'),
   },
   {
     id: 'e2',
-    description: 'A pair of trousers',
-    amount: 89.29,
-    date: new Date('2022-01-05'),
+    description: 'Kleding van Zalando',
+    amount: 89,
+    date: new Date('2023-01-05'),
   },
   {
     id: 'e3',
-    description: 'Some bananas',
-    amount: 5.99,
-    date: new Date('2021-12-01'),
+    description: 'Booschappen: 1 feb - 7 feb',
+    amount: 125.99,
+    date: new Date('2023-02-01'),
   },
   {
     id: 'e4',
-    description: 'A book',
+    description: 'Een boek',
     amount: 14.99,
-    date: new Date('2022-02-19'),
+    date: new Date('2023-02-12'),
   },
 ];
 

@@ -4,6 +4,8 @@ import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput';
 import { ExpensesContext } from '../store/expenses-context';
 import { getDateMinusDays } from '../util/date';
 
+//de functie RecentExpenses zorgt ervoor dat uitgaven binnen 7 dagen bij de recente
+//uitgaven worden getoond
 function RecentExpenses() {
   const expensesCtx = useContext(ExpensesContext);
 
@@ -14,6 +16,7 @@ function RecentExpenses() {
     return expense.date >= date7DaysAgo && expense.date <= today;
   });
 
+  //hiermee worden de uitgaven van de laatste 7 dagen aangeroepen
   return (
     <ExpensesOutput
       expenses={recentExpenses}

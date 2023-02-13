@@ -7,6 +7,7 @@ function AllExpenses() {
   const expensesCtx = useContext(ExpensesContext);
 
   return (
+    //ExpensesOutput is een component die alle expenses aanroept
     <ExpensesOutput
       expenses={expensesCtx.expenses}
       expensesPeriod="Total"

@@ -17,6 +17,8 @@ const BottomTabs = createBottomTabNavigator();
 
 function ExpensesOverview() {
   return (
+    // dit is een bottom tab navigatie menu, de eerste is voor recente uitgaven,
+    // tweede is voor alle uitgaven, en derde is om een foto toe te voegen
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
@@ -76,8 +78,11 @@ function ExpensesOverview() {
 export default function App() {
   return (
     <>
+
       <StatusBar style="light" />
       <ExpensesContextProvider>
+        {/* Dit is ook een navigatie menu, als je op het plusje rechtsboven klikt kan je een
+        uitgaven toevoegen en als je op een uitgaeven klikt kan je hem verwijderen of updaten */}
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{

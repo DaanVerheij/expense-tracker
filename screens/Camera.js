@@ -11,7 +11,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 
 
 
-
+// deze functie is nog niet af
 function TakePicture() {
   return (
     <View style={styles.container}>
