@@ -10,7 +10,7 @@ import AllExpenses from './screens/AllExpenses';
 import { GlobalStyles } from './constants/styles';
 import IconButton from './components/UI/IconButton';
 import ExpensesContextProvider from './store/expenses-context';
-import Camera from './screens/Camera';
+import ImagePicker from './screens/ImagePicker';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -61,8 +61,8 @@ function ExpensesOverview() {
         }}
       />
       <BottomTabs.Screen
-        name="Camera"
-        component={Camera}
+        name="ImagePicker"
+        component={ImagePicker}
         options={{
           title: 'Camera',
           tabBarLabel: 'Camera',

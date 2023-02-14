@@ -6,6 +6,9 @@ function renderExpenseItem(itemData) {
   return <ExpenseItem {...itemData.item} />;
 }
 
+
+//Deze functie bevat een component genaamd ExpensesList dat een
+// FlatList gebruikt om de uitgaven weer te geven
 function ExpensesList({ expenses }) {
   return (
     <FlatList
