@@ -1,4 +1,4 @@
-import { Alert, Image, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import {
   launchCameraAsync,
   useCameraPermissions,
@@ -10,7 +10,7 @@ import { GlobalStyles } from '../constants/styles';
 import OutlinedButton from '../components/UI/OutlinedButton';
 
 function ImagePicker() {
-  const [pickedImage, setPickedImage] = useState();
+  const [pickedImages, setPickedImages] = useState([]);
 
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
@@ -46,38 +46,60 @@ function ImagePicker() {
       quality: 0.5,
     });
 
-    setPickedImage(image.uri);
+    setPickedImages((prevPickedImages) => [...prevPickedImages, image.uri]);
   }
 
 
-  let imagePreview = <Text>No image taken yet.</Text>;
+  let imagePreview = <Text>No images taken yet.</Text>;
 
-  if (pickedImage) {
-    imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
+  if (pickedImages.length > 0) {
+    imagePreview = pickedImages.map((uri) => (
+      <Image key={uri} style={styles.image} source={{ uri }} />
+    ));
   }
 
   return (
-    <View>
-      <View style={styles.imagePreview}>{imagePreview}</View>
-      <OutlinedButton icon="camera" onPress={takeImageHandler}>Take a picture</OutlinedButton>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.imagePreview}>{imagePreview}</View>
+      </ScrollView>
+      <OutlinedButton
+        icon="camera"
+        onPress={takeImageHandler}
+        style={styles.button}
+      >
+        Take a picture
+      </OutlinedButton>
     </View>
   );
 }
 
-export default ImagePicker;
-
 const styles = StyleSheet.create({
-  imagePreview: {
-    width: '100%',
-    height: 200,
-    marginVertical: 8,
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: GlobalStyles.primary500,
-    borderRadius: 4,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imagePreview: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: 350,
+    height: 350,
+    margin: 5,
+  },
+  button: {
+    marginBottom: 20,
   },
 });
+
+export default ImagePicker;
