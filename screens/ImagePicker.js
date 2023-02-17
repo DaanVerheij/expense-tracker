@@ -1,4 +1,4 @@
-import { Alert, Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Alert, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import {
   launchCameraAsync,
   useCameraPermissions,
@@ -12,8 +12,7 @@ import OutlinedButton from '../components/UI/OutlinedButton';
 function ImagePicker() {
   const [pickedImages, setPickedImages] = useState([]);
 
-  const [cameraPermissionInformation, requestPermission] =
-    useCameraPermissions();
+  const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
 
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -49,12 +48,21 @@ function ImagePicker() {
     setPickedImages((prevPickedImages) => [...prevPickedImages, image.uri]);
   }
 
+  function removeImageHandler(index) {
+    setPickedImages((prevPickedImages) => {
+      const newPickedImages = [...prevPickedImages];
+      newPickedImages.splice(index, 1);
+      return newPickedImages;
+    });
+  }
 
   let imagePreview = <Text>No images taken yet.</Text>;
 
   if (pickedImages.length > 0) {
-    imagePreview = pickedImages.map((uri) => (
-      <Image key={uri} style={styles.image} source={{ uri }} />
+    imagePreview = pickedImages.map((uri, index) => (
+      <TouchableOpacity key={uri} onPress={() => removeImageHandler(index)}>
+        <Image style={styles.image} source={{ uri }} />
+      </TouchableOpacity>
     ));
   }
 
@@ -63,11 +71,7 @@ function ImagePicker() {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.imagePreview}>{imagePreview}</View>
       </ScrollView>
-      <OutlinedButton
-        icon="camera"
-        onPress={takeImageHandler}
-        style={styles.button}
-      >
+      <OutlinedButton icon="camera" onPress={takeImageHandler} style={styles.button}>
         Take a picture
       </OutlinedButton>
     </View>
