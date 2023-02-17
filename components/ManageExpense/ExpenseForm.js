@@ -74,7 +74,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
           label="Amount"
           invalid={!inputs.amount.isValid}
           textInputConfig={{
-            keyboardType: 'decimal-pad',
+            keyboardType: 'numbers-and-punctuation',
             onChangeText: inputChangedHandler.bind(this, 'amount'),
             value: inputs.amount.value,
           }}
@@ -84,7 +84,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
           label="Date"
           invalid={!inputs.date.isValid}
           textInputConfig={{
-            placeholder: 'YYYY-MM-DD',
+            placeholder: 'DD-MM-YYYY',
             maxLength: 10,
             onChangeText: inputChangedHandler.bind(this, 'date'),
             value: inputs.date.value,
@@ -104,7 +104,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
       />
       {formIsInvalid && (
         <Text style={styles.errorText}>
-          Invalid input values - please check your entered data!
+          Invalid input values - Do not use , at 'Amount'. The date should be YYYY-MM-DD
         </Text>
       )}
       <View style={styles.buttons}>
@@ -123,12 +123,12 @@ export default ExpenseForm;
 
 const styles = StyleSheet.create({
   form: {
-    marginTop: 40,
+    marginTop: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: GlobalStyles.colors.primary500,
     marginVertical: 24,
     textAlign: 'center',
   },
@@ -143,14 +143,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: GlobalStyles.colors.error500,
     margin: 8,
+    fontWeight: 'bold',
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    fontWeight: 'bold',
   },
   button: {
     minWidth: 120,
     marginHorizontal: 8,
+    fontWeight: 'bold',
   },
 });

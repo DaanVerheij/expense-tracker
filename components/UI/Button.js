@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   flatText: {
     color: GlobalStyles.colors.primary200,

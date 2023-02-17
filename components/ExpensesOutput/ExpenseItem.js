@@ -40,20 +40,20 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   expenseItem: {
-    padding: 12,
+    padding: 14,
     marginVertical: 8,
     backgroundColor: GlobalStyles.colors.primary500,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderRadius: 6,
-    elevation: 3,
+    borderRadius: 9,
     shadowColor: GlobalStyles.colors.gray500,
     shadowRadius: 4,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
+    marginTop: 12,
   },
   textBase: {
-    color: GlobalStyles.colors.primary50,
+    color: 'white',
   },
   description: {
     fontSize: 16,
@@ -66,11 +66,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 9,
     minWidth: 80,
   },
   amount: {
     color: GlobalStyles.colors.primary500,
     fontWeight: 'bold',
+    fontSize: 15,
   },
 });

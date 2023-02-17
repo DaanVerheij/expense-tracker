@@ -49,6 +49,7 @@ function ImagePicker() {
     setPickedImage(image.uri);
   }
 
+
   let imagePreview = <Text>No image taken yet.</Text>;
 
   if (pickedImage) {
