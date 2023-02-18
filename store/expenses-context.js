@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
 
-// uitgaven die gelijk worden getoond 
+// dummy uitgaven die gelijk worden getoond, kunnen inprincipe weg worden gehaald.
 const DUMMY_EXPENSES = [
   {
     id: 'e1',

@@ -9,11 +9,14 @@ import { useState } from 'react';
 import { GlobalStyles } from '../constants/styles';
 import OutlinedButton from '../components/UI/OutlinedButton';
 
+
 function ImagePicker() {
   const [pickedImages, setPickedImages] = useState([]);
 
   const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
 
+
+  // functie die eerste toegang vraagt, en als je geen toegang geeft krijg je een alert
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
       const permissionResponse = await requestPermission();
@@ -48,6 +51,7 @@ function ImagePicker() {
     setPickedImages((prevPickedImages) => [...prevPickedImages, image.uri]);
   }
 
+  // functie die de foto's weghaalt als je er op klikt
   function removeImageHandler(index) {
     setPickedImages((prevPickedImages) => {
       const newPickedImages = [...prevPickedImages];
