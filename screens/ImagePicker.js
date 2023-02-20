@@ -15,7 +15,7 @@ function ImagePicker() {
 
   const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
 
-
+  
   // functie die eerste toegang vraagt, en als je geen toegang geeft krijg je een alert
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -79,13 +79,16 @@ function ImagePicker() {
 
   let imagePreview = <Text>No images taken yet.</Text>;
 
-  if (pickedImages.length > 0) {
-    imagePreview = pickedImages.map((uri, index) => (
-      <TouchableOpacity key={uri} onPress={() => removeImageHandler(index)}>
+if (pickedImages.length > 0) {
+  imagePreview = pickedImages.map((uri, index) => (
+    <View key={uri} style={styles.imageContainer}>
+      <TouchableOpacity onPress={() => removeImageHandler(index)}>
         <Image style={styles.image} source={{ uri }} />
       </TouchableOpacity>
-    ));
-  }
+      <Text style={styles.imageText}>Image {index + 1}</Text>
+    </View>
+  ));
+}
 
   return (
     <View style={styles.container}>
