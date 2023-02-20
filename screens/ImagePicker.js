@@ -48,7 +48,7 @@ function ImagePicker() {
       quality: 0.5,
     });
 
-    setPickedImages((prevPickedImages) => [...prevPickedImages, image.uri]);
+    setPickedImages((prevPickedImages) => [...prevPickedImages, image.assets[0].uri]);
   }
 
   // functie die de foto's weghaalt als je er op klikt

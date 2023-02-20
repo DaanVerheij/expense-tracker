@@ -28,6 +28,9 @@ const DUMMY_EXPENSES = [
   },
 ];
 
+
+//Deze code definieert een React-context en een reducer-functie voor het beheren van een lijst van uitgaven
+// met functionaliteiten voor toevoegen, updaten en verwijderen van uitgaven.
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({ description, amount, date }) => {},
@@ -35,7 +38,7 @@ export const ExpensesContext = createContext({
   updateExpense: (id, { description, amount, date }) => {},
 });
 
-// De add, update en delete functie
+
 function expensesReducer(state, action) {
   switch (action.type) {
     case 'ADD':

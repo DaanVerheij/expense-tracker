@@ -4,6 +4,7 @@ import { GlobalStyles } from '../../constants/styles';
 import ExpensesList from './ExpensesList';
 import ExpensesSummary from './ExpensesSummary';
 
+// deze functie toon een samenvatting van uitgaven, en een fallbacktext afhankelijk of er uitgaven zijn
 function ExpensesOutput({ expenses, expensesPeriod, fallbackText }) {
   let content = <Text style={styles.infoText}>{fallbackText}</Text>;
 

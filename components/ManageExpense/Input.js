@@ -2,6 +2,9 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 
+
+//Deze functie definieert een herbruikbaar invoerveldcomponent met label
+// en stijl voor tekst- en meerdere-regel tekstinvoer.
 function Input({ label, invalid, style, textInputConfig }) {
 
   const inputStyles = [styles.input];

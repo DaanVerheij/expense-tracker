@@ -6,6 +6,9 @@ import Button from '../UI/Button';
 import { getFormattedDate } from '../../util/date';
 import { GlobalStyles } from '../../constants/styles';
 
+// Deze code creëert een component dat de gebruiker in staat
+// stelt uitgaven in te voeren,
+// waarbij invoervelden voor bedrag, datum en beschrijving beschikbaar zijn om te vullen.
 function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
   const [inputs, setInputs] = useState({
     amount: {
@@ -22,6 +25,8 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     },
   });
 
+  //Deze functie wordt gebruikt als event handler om invoer van de gebruiker
+  // in te stellen voor een specifiek invoerveld in de staat van het formulier.
   function inputChangedHandler(inputIdentifier, enteredValue) {
     setInputs((curInputs) => {
       return {
@@ -31,6 +36,9 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     });
   }
 
+
+  //Deze functie controleert of de invoer van de gebruiker voor een uitgave geldig is en stuurt de gegevens door naar een andere functie voor verwerking
+  // of toont foutmeldingen op basis van de validatie.
   function submitHandler() {
     const expenseData = {
       amount: +inputs.amount.value,
@@ -43,7 +51,6 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     const descriptionIsValid = expenseData.description.trim().length > 0;
 
     if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
-      // Alert.alert('Invalid input', 'Please check your input values');
       setInputs((curInputs) => {
         return {
           amount: { value: curInputs.amount.value, isValid: amountIsValid },
@@ -60,6 +67,9 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     onSubmit(expenseData);
   }
 
+
+  //Deze functie definieert een component voor het invoeren van uitgaven, inclusief validering en weergave
+  // van eventuele foutmeldingen en de mogelijkheid om te annuleren of op te slaan.
   const formIsInvalid =
     !inputs.amount.isValid ||
     !inputs.date.isValid ||

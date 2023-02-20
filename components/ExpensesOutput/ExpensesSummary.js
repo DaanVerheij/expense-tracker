@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 
+//deze functie berekent de bedragen op basis van periode
 function ExpensesSummary({ expenses, periodName }) {
   const expensesSum = expenses.reduce((sum, expense) => {
     return sum + expense.amount;
