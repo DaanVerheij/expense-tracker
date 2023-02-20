@@ -53,11 +53,28 @@ function ImagePicker() {
 
   // functie die de foto's weghaalt als je er op klikt
   function removeImageHandler(index) {
-    setPickedImages((prevPickedImages) => {
-      const newPickedImages = [...prevPickedImages];
-      newPickedImages.splice(index, 1);
-      return newPickedImages;
-    });
+    Alert.alert(
+      'Delete Image',
+      'Are you sure you want to delete this image?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            setPickedImages((prevPickedImages) => {
+              const newPickedImages = [...prevPickedImages];
+              newPickedImages.splice(index, 1);
+              return newPickedImages;
+            });
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   }
 
   let imagePreview = <Text>No images taken yet.</Text>;
