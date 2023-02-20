@@ -1,5 +1,6 @@
 import { useContext, useLayoutEffect } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
+import { Alert } from 'react-native';
 
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import Button from '../components/UI/Button';
@@ -10,6 +11,7 @@ import { ExpensesContext } from '../store/expenses-context';
 // de functie 'ManageExpense' regelt de verschillende manieren hoe je op een uitgaven
 // kan klikken. Bijvoorbeeld als je op uitgaven klikt dan kan je hem bewerken, maar
 // als je op het plusje rechtsboven klikt kan je een uitgaven toevoegen
+
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
 
@@ -26,18 +28,29 @@ function ManageExpense({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
+  //alert als je op delete klikt.
   function deleteExpenseHandler() {
-    expensesCtx.deleteExpense(editedExpenseId);
-    //navigation.goBack stuurt je terug naar de vorige pagina als de functie 
-    //is uitgevoerd
-    navigation.goBack();
+    Alert.alert(
+      'Are you sure?',
+      'Do you really want to delete this expense?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            expensesCtx.deleteExpense(editedExpenseId);
+            navigation.goBack();
+          },
+        },
+      ]
+    );
   }
 
   function cancelHandler() {
     navigation.goBack();
   }
 
-  //confirm button om een uitgaven te updaten en verwijderen
   function confirmHandler(expenseData) {
     if (isEditing) {
       expensesCtx.updateExpense(editedExpenseId, expenseData);
@@ -48,8 +61,6 @@ function ManageExpense({ route, navigation }) {
   }
 
   return (
-    //als je op add drukt wordt de confirmhandler uitgevoerd en als je op cancel
-    //drukt wordt cancelhandler uitgevoerd
     <View style={styles.container}>
       <ExpenseForm
         submitButtonLabel={isEditing ? 'Update' : 'Add'}
@@ -58,7 +69,6 @@ function ManageExpense({ route, navigation }) {
         defaultValues={selectedExpense}
       />
       {isEditing && (
-        // delete icon om een uitgaven te verwijderen
         <View style={styles.deleteContainer}>
           <IconButton
             icon="trash"
