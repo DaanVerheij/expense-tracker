@@ -6,7 +6,7 @@ import ExpensesList from './ExpensesList';
 import ExpensesSummary from './ExpensesSummary';
 
 function ExpensesOutput({ expenses, expensesPeriod, fallbackText }) {
-  const [sortType, setSortType] = useState('date');
+  const [sortType, setSortType] = useState('high-to-low');
 
   const sortedExpenses = expenses.sort((a, b) => {
     if (sortType === 'high-to-low') {
