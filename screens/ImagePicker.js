@@ -1,21 +1,29 @@
-import { Alert, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import {
   launchCameraAsync,
   useCameraPermissions,
   PermissionStatus,
-} from 'expo-image-picker';
-import { useState } from 'react';
+} from "expo-image-picker";
+import { useState } from "react";
 
-import { GlobalStyles } from '../constants/styles';
-import OutlinedButton from '../components/UI/OutlinedButton';
-
+import { GlobalStyles } from "../constants/styles";
+import OutlinedButton from "../components/UI/OutlinedButton";
 
 function ImagePicker() {
   const [pickedImages, setPickedImages] = useState([]);
 
-  const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
+  const [cameraPermissionInformation, requestPermission] =
+    useCameraPermissions();
 
-  
   // functie die eerste toegang vraagt, en als je geen toegang geeft krijg je een alert
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -26,8 +34,8 @@ function ImagePicker() {
 
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
-        'Insufficient Permissions!',
-        'You need to grant camera permissions to use this app.'
+        "Insufficient Permissions!",
+        "You need to grant camera permissions to use this app."
       );
       return false;
     }
@@ -48,22 +56,25 @@ function ImagePicker() {
       quality: 0.5,
     });
 
-    setPickedImages((prevPickedImages) => [...prevPickedImages, image.assets[0].uri]);
+    setPickedImages((prevPickedImages) => [
+      ...prevPickedImages,
+      { uri: image.assets[0].uri, text: "" },
+    ]);
   }
 
   // functie die de foto's weghaalt als je er op klikt
   function removeImageHandler(index) {
     Alert.alert(
-      'Delete Image',
-      'Are you sure you want to delete this image?',
+      "Delete Image",
+      "Are you sure you want to delete this image?",
       [
         {
-          text: 'Cancel',
-          style: 'cancel',
+          text: "Cancel",
+          style: "cancel",
         },
         {
-          text: 'Delete',
-          style: 'destructive',
+          text: "Delete",
+          style: "destructive",
           onPress: () => {
             setPickedImages((prevPickedImages) => {
               const newPickedImages = [...prevPickedImages];
@@ -77,27 +88,41 @@ function ImagePicker() {
     );
   }
 
+  function onTextChangeHandler(index, text) {
+    setPickedImages((prevPickedImages) => {
+      const newPickedImages = [...prevPickedImages];
+      newPickedImages[index] = { ...newPickedImages[index], text };
+      return newPickedImages;
+    });
+  }
+
   let imagePreview = <Text>No images taken yet.</Text>;
 
-if (pickedImages.length > 0) {
-  imagePreview = pickedImages.map((uri, index) => (
-    <View key={uri} style={styles.imageContainer}>
-      <TouchableOpacity onPress={() => removeImageHandler(index)}>
-        <Image style={styles.image} source={{ uri }} />
-      </TouchableOpacity>
-      <Text style={styles.imageText}>Image {index + 1}</Text>
-    </View>
-  ));
-}
+  if (pickedImages.length > 0) {
+    imagePreview = pickedImages.map((image, index) => (
+      <View key={image.uri} style={styles.imageContainer}>
+        <TouchableOpacity onPress={() => removeImageHandler(index)}>
+          <Image style={styles.image} source={{ uri: image.uri }} />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.imageTextInput}
+          placeholder="Enter description"
+          value={image.text}
+          onChangeText={(text) => onTextChangeHandler(index, text)}
+        />
+      </View>
+    ));
+  }
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={styles.imagePreview}>{imagePreview}</View>
+        <View></View>
+        <OutlinedButton style={styles.button} onPress={takeImageHandler}>
+          Take Image
+        </OutlinedButton>
+        {imagePreview}
       </ScrollView>
-      <OutlinedButton icon="camera" onPress={takeImageHandler} style={styles.button}>
-        Take a picture
-      </OutlinedButton>
     </View>
   );
 }
@@ -105,28 +130,38 @@ if (pickedImages.length > 0) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: GlobalStyles.backgroundColor,
+    padding: 20,
   },
   scrollViewContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imagePreview: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  image: {
-    width: 350,
-    height: 350,
-    margin: 5,
+    alignItems: "center",
   },
   button: {
+    marginTop: 20,
     marginBottom: 20,
+    borderRadius: 6,
+  },
+  imageContainer: {
+    marginBottom: 20,
+    alignItems: "center",
+  },
+  image: {
+    width: 300,
+    height: 300,
+    marginBottom: 10,
+  },
+  imageText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  imageTextInput: {
+    width: "100%",
+    borderColor: GlobalStyles.colors.primary500,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 10,
   },
 });
 
