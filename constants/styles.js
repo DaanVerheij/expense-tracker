@@ -1,4 +1,4 @@
-// dit is een style document met de verschillende kleuren die je hiermee kan aanroepen
+// dit is een style document met de verschillende kleuren die je hiermee bijvoorbeeld kan aanroepen
 //GlobalStyles.colors.primary200. Dit maakt het een stuk makkelijker en overzichtelijker
 export const GlobalStyles = {
     colors: {

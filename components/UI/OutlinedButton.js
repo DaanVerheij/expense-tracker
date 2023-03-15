@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { GlobalStyles } from '../../constants/styles';
 
+// dit is een outlined button component die wordt gebruikt op de camera page.
 function OutlinedButton({ onPress, icon, children }) {
   return (
     <Pressable
@@ -30,7 +31,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: GlobalStyles.colors.primary500,
+    // backgroundColor: GlobalStyles.colors.primary500,
+    borderColor: GlobalStyles.colors.primary500,
+    borderWidth: 1,
   },
   pressed: {
     opacity: 0.7,
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   text: {
-    color: "white",
+    color: GlobalStyles.colors.primary500,
     fontWeight: 'bold',
   },
 });

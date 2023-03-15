@@ -1,6 +1,9 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+
+// dit is een icon button component die wordt gebruikt als je een expense wilt verwijderen, hiermee wordt gebruik gemaakt van de library @expo/vector-icons
+// we gebruiken het prullenbakje, waardoor het voor de gebruiker duidelijk is dat je de expense kan verwijderen.
 function IconButton({ icon, size, color, onPress }) {
   return (
     <Pressable

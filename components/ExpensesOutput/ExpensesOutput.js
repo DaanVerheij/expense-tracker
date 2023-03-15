@@ -5,6 +5,7 @@ import { GlobalStyles } from '../../constants/styles';
 import ExpensesList from './ExpensesList';
 import ExpensesSummary from './ExpensesSummary';
 
+// dit is een functie voor het sorteren van de expenses. De begin state is high-to-low.
 function ExpensesOutput({ expenses, expensesPeriod, fallbackText }) {
   const [sortType, setSortType] = useState('high-to-low');
 

@@ -8,7 +8,7 @@ function AllExpenses() {
   const expensesCtx = useContext(ExpensesContext);
 
   return (
-    //ExpensesOutput is een component die alle expenses aanroept
+    //ExpensesOutput is een component die alle expenses aanroept, als er geen expenses zijn wordt de fallbackText laten zien.
     <ExpensesOutput
       expenses={expensesCtx.expenses}
       expensesPeriod="Total"
